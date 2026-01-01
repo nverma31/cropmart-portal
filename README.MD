@@ -15,6 +15,12 @@ A React Framework for building internal tools, admin panels, dashboards & B2B ap
 
 Refine's hooks and components simplifies the development process and eliminates the repetitive tasks by providing industry-standard solutions for crucial aspects of a project, including authentication, access control, routing, networking, state management, and i18n.
 
+## Environment Configuration
+
+This project requires certain environment variables to be set. You can use `.env.development` for local development and `.env.production` for production builds.
+
+- `VITE_API_URL`: The base URL of the backend API (e.g., `https://cropmart-backend.onrender.com/v1`).
+
 ## Available Scripts
 
 ### Running the development server.

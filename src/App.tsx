@@ -17,23 +17,22 @@ import routerProvider, {
   NavigateToResource,
   UnsavedChangesNotifier,
 } from "@refinedev/react-router";
-import dataProvider from "@refinedev/simple-rest";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router";
 import { authProvider } from "./authProvider";
+import { dataProvider } from "./dataProvider";
 import { Header } from "./components/header";
 import { ColorModeContextProvider } from "./contexts/color-mode";
-import {
-  BlogPostCreate,
-  BlogPostEdit,
-  BlogPostList,
-  BlogPostShow,
-} from "./pages/blog-posts";
-import {
-  CategoryCreate,
-  CategoryEdit,
-  CategoryList,
-  CategoryShow,
-} from "./pages/categories";
+
+import { UserList } from "./pages/users/list";
+import { UserEdit } from "./pages/users/edit";
+import { FarmerList } from "./pages/farmers/list";
+import { FarmerEdit } from "./pages/farmers/edit";
+import { IntermediaryList } from "./pages/intermediaries/list";
+import { IntermediaryEdit } from "./pages/intermediaries/edit";
+import { EnquiryList } from "./pages/enquiries/list";
+import { EnquiryCreate } from "./pages/enquiries/create";
+import { EnquiryShow } from "./pages/enquiries/show";
+
 import { ForgotPassword } from "./pages/forgotPassword";
 import { Login } from "./pages/login";
 import { Register } from "./pages/register";
@@ -41,7 +40,6 @@ import { Register } from "./pages/register";
 function App() {
   return (
     <BrowserRouter>
-      <GitHubBanner />
       <RefineKbarProvider>
         <ColorModeContextProvider>
           <CssBaseline />
@@ -49,30 +47,35 @@ function App() {
           <RefineSnackbarProvider>
             <DevtoolsProvider>
               <Refine
-                dataProvider={dataProvider("https://api.fake-rest.refine.dev")}
+                dataProvider={dataProvider}
                 notificationProvider={useNotificationProvider}
                 routerProvider={routerProvider}
                 authProvider={authProvider}
                 resources={[
                   {
-                    name: "blog_posts",
-                    list: "/blog-posts",
-                    create: "/blog-posts/create",
-                    edit: "/blog-posts/edit/:id",
-                    show: "/blog-posts/show/:id",
-                    meta: {
-                      canDelete: true,
-                    },
+                    name: "users",
+                    list: "/users",
+                    edit: "/users/edit/:id",
+                    show: "/users/show/:id",
+                    meta: { canDelete: true },
                   },
                   {
-                    name: "categories",
-                    list: "/categories",
-                    create: "/categories/create",
-                    edit: "/categories/edit/:id",
-                    show: "/categories/show/:id",
-                    meta: {
-                      canDelete: true,
-                    },
+                    name: "farmers",
+                    list: "/farmers",
+                    edit: "/farmers/edit/:id",
+                    show: "/farmers/show/:id",
+                  },
+                  {
+                    name: "intermediaries",
+                    list: "/intermediaries",
+                    edit: "/intermediaries/edit/:id",
+                    show: "/intermediaries/show/:id",
+                  },
+                  {
+                    name: "enquiries",
+                    list: "/enquiries",
+                    create: "/enquiries/create",
+                    show: "/enquiries/show/:id",
                   },
                 ]}
                 options={{
@@ -96,20 +99,30 @@ function App() {
                   >
                     <Route
                       index
-                      element={<NavigateToResource resource="blog_posts" />}
+                      element={<NavigateToResource resource="users" />}
                     />
-                    <Route path="/blog-posts">
-                      <Route index element={<BlogPostList />} />
-                      <Route path="create" element={<BlogPostCreate />} />
-                      <Route path="edit/:id" element={<BlogPostEdit />} />
-                      <Route path="show/:id" element={<BlogPostShow />} />
+
+                    <Route path="/users">
+                      <Route index element={<UserList />} />
+                      <Route path="edit/:id" element={<UserEdit />} />
                     </Route>
-                    <Route path="/categories">
-                      <Route index element={<CategoryList />} />
-                      <Route path="create" element={<CategoryCreate />} />
-                      <Route path="edit/:id" element={<CategoryEdit />} />
-                      <Route path="show/:id" element={<CategoryShow />} />
+
+                    <Route path="/farmers">
+                      <Route index element={<FarmerList />} />
+                      <Route path="edit/:id" element={<FarmerEdit />} />
                     </Route>
+
+                    <Route path="/intermediaries">
+                      <Route index element={<IntermediaryList />} />
+                      <Route path="edit/:id" element={<IntermediaryEdit />} />
+                    </Route>
+
+                    <Route path="/enquiries">
+                      <Route index element={<EnquiryList />} />
+                      <Route path="create" element={<EnquiryCreate />} />
+                      <Route path="show/:id" element={<EnquiryShow />} />
+                    </Route>
+
                     <Route path="*" element={<ErrorComponent />} />
                   </Route>
                   <Route
