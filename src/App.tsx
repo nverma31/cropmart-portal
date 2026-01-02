@@ -26,12 +26,15 @@ import { ColorModeContextProvider } from "./contexts/color-mode";
 import { UserList } from "./pages/users/list";
 import { UserEdit } from "./pages/users/edit";
 import { FarmerList } from "./pages/farmers/list";
+import { FarmerCreate } from "./pages/farmers/create";
 import { FarmerEdit } from "./pages/farmers/edit";
 import { IntermediaryList } from "./pages/intermediaries/list";
+import { IntermediaryCreate } from "./pages/intermediaries/create";
 import { IntermediaryEdit } from "./pages/intermediaries/edit";
 import { EnquiryList } from "./pages/enquiries/list";
 import { EnquiryCreate } from "./pages/enquiries/create";
 import { EnquiryShow } from "./pages/enquiries/show";
+import { EnquiryEdit } from "./pages/enquiries/edit";
 
 import { ForgotPassword } from "./pages/forgotPassword";
 import { Login } from "./pages/login";
@@ -62,12 +65,14 @@ function App() {
                   {
                     name: "farmers",
                     list: "/farmers",
+                    create: "/farmers/create",
                     edit: "/farmers/edit/:id",
                     show: "/farmers/show/:id",
                   },
                   {
                     name: "intermediaries",
                     list: "/intermediaries",
+                    create: "/intermediaries/create",
                     edit: "/intermediaries/edit/:id",
                     show: "/intermediaries/show/:id",
                   },
@@ -75,6 +80,7 @@ function App() {
                     name: "enquiries",
                     list: "/enquiries",
                     create: "/enquiries/create",
+                    edit: "/enquiries/edit/:id",
                     show: "/enquiries/show/:id",
                   },
                 ]}
@@ -109,20 +115,22 @@ function App() {
 
                     <Route path="/farmers">
                       <Route index element={<FarmerList />} />
+                      <Route path="create" element={<FarmerCreate />} />
                       <Route path="edit/:id" element={<FarmerEdit />} />
                     </Route>
 
                     <Route path="/intermediaries">
                       <Route index element={<IntermediaryList />} />
+                      <Route path="create" element={<IntermediaryCreate />} />
                       <Route path="edit/:id" element={<IntermediaryEdit />} />
                     </Route>
 
                     <Route path="/enquiries">
                       <Route index element={<EnquiryList />} />
                       <Route path="create" element={<EnquiryCreate />} />
+                      <Route path="edit/:id" element={<EnquiryEdit />} />
                       <Route path="show/:id" element={<EnquiryShow />} />
                     </Route>
-
                     <Route path="*" element={<ErrorComponent />} />
                   </Route>
                   <Route
