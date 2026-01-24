@@ -51,7 +51,16 @@ export const IntermediaryCreate = () => {
                     name="name"
                 />
                 <TextField
+                    {...register("businessName")}
+                    margin="normal"
+                    fullWidth
+                    InputLabelProps={{ shrink: true }}
+                    label="Business Name"
+                    name="businessName"
+                />
+                <TextField
                     {...register("businessType")}
+
                     margin="normal"
                     fullWidth
                     InputLabelProps={{ shrink: true }}

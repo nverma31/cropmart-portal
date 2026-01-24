@@ -22,14 +22,18 @@ const fetchWithAuth = async (url: string, options: RequestInit = {}) => {
 
     if (!response.ok) {
         const error = await response.json().catch(() => ({ message: "Unknown error" }));
+        console.error("API Error:", error);
         throw {
-            message: error.message || response.statusText,
+            message: error.errorMessage || error.message || response.statusText,
             statusCode: response.status,
+            status: response.status,
         };
     }
 
+
     return response.json();
 };
+
 
 export const dataProvider: DataProvider = {
     getList: async ({ resource, pagination, sorters, filters }) => {
